@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grade 8 Study Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f6f9ff;
+}
+header{
+    background:#4CAF50;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+section{ padding:25px; display:none;}
+section.active{ display:block;}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 18px;
+    margin:5px;
+    background:#4c6fff;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.back{
+    display:block;
+    margin-top:15px;
+    color:#333;
+    text-decoration:none;
+}
+
+.quote{
+    background:#dfe5ff;
+    padding:8px;
+    border-radius:10px;
+    margin-bottom:5px;
+}
+
+.subjects-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.subject-card{
+    width:260px;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    border:2px solid #ddd;
+    background:white;
+    box-shadow:0 4px 8px rgba(0,0,0,.1);
+    transition:0.3s;
+}
+
+.subject-card:hover{ transform:scale(1.03); }
+
+button{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    padding:10px;
+    width:100%;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#3b8f41;
+}
+
+.link-box{
+    background:#fff3cd;
+    border:2px solid #ffda7b;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+#quiz .option{display:block;margin:8px auto;width:250px;}
+#quiz,#result{display:none;}
+
+.mindmap-box{
+    border:2px dashed #4c6fff;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    text-align:left;
+    min-height:150px;
+}
+
+.mindmap-box img{
+    max-width:100%;
+    display:block;
+    margin:10px auto;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎓 Grade 8 Study Hub</h1>
+<p>Philippines 🇵🇭</p>
+<nav>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('subjects')">Subjects</a>
+<a onclick="showSection('quizzes')">Quizzes</a>
+<a onclick="showSection('mindmap')">Mindmap</a>
+</nav>
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="active">
+<h2>Welcome to Grade 8 Study Hub!</h2>
+<p class="quote">“Your future is created by what you do today, not tomorrow.”</p>
+<p class="quote">“Believe in yourself — you are capable of amazing things.”</p>
+<p class="quote">“Every mistake is a lesson, not a failure.”</p>
+<p class="quote">“Success is the sum of small efforts repeated daily.”</p>
+<p class="quote">“Dream big. Work hard. Stay focused.”</p>
+<p class="quote">“Education is the most powerful weapon to change the world.”</p>
+<p class="quote">“Don’t stop until you’re proud.”</p>
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects">
+<h2>📚 Grade 8 Subjects</h2>
+<div class="link-box">
+<b>📥 Official DepEd Grade 8 Modules:</b><br>
+<a href="https://lrmds.deped.gov.ph/grade/8" target="_blank">
+https://lrmds.deped.gov.ph/grade/8
+</a>
+</div>
+
+<div class="subjects-grid">
+<div class="subject-card" style="background:#FFD1D1">
+<h3>📐 Math</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+<div class="subject-card" style="background:#D1FFD1">
+<h3>🔬 Science</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+<div class="subject-card" style="background:#D1D1FF">
+<h3>📖 Filipino</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+<div class="subject-card" style="background:#FFE4B5">
+<h3>📚 English</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+<div class="subject-card" style="background:#FFB6C1">
+<h3>🏛️ Araling Panlipunan (AP)</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+<div class="subject-card" style="background:#B0E0E6">
+<h3>🎵🎨🏃‍♂️💊 MAPEH</h3>
+<button onclick="openDepEd()">Open DepEd Resources</button>
+</div>
+</div>
+</section>
+
+<!-- QUIZZES -->
+<section id="quizzes">
+<h2>📝 Grade 8 Quizzes</h2>
+<button class="btn" onclick="startQuiz('math')">Math</button>
+<button class="btn" onclick="startQuiz('science')">Science</button>
+<button class="btn" onclick="startQuiz('english')">English</button>
+<button class="btn" onclick="startQuiz('filipino')">Filipino</button>
+<button class="btn" onclick="startQuiz('ap')">AP</button>
+<button class="btn" onclick="startQuiz('mapeh')">MAPEH</button>
+
+<div id="quiz">
+<h3 id="question"></h3>
+<div id="options"></div>
+<p id="current"></p>
+</div>
+
+<div id="result">
+<h3>Your Score:</h3>
+<h1 id="score"></h1>
+<button class="btn" onclick="restartQuiz()">Restart Quiz</button>
+</div>
+</section>
+
+<!-- MINDMAP -->
+<section id="mindmap">
+<h2>🧠 Grade 8 Study Mindmap</h2>
+<p>Add images for each subject below:</p>
+
+<div class="mindmap-box">
+  <h3>📐 Math</h3>
+  <button class="btn" onclick="addSubjectImage('math')">➕ Add Image</button>
+  <div id="math"></div>
+
+  <h3>🔬 Science</h3>
+  <button class="btn" onclick="addSubjectImage('science')">➕ Add Image</button>
+  <div id="science"></div>
+
+  <h3>📖 Filipino</h3>
+  <button class="btn" onclick="addSubjectImage('filipino')">➕ Add Image</button>
+  <div id="filipino"></div>
+
+  <h3>📚 English</h3>
+  <button class="btn" onclick="addSubjectImage('english')">➕ Add Image</button>
+  <div id="english"></div>
+
+  <h3>🏛️ AP</h3>
+  <button class="btn" onclick="addSubjectImage('ap')">➕ Add Image</button>
+  <div id="ap"></div>
+
+  <h3>🎵🎨🏃‍♂️💊 MAPEH</h3>
+  <button class="btn" onclick="addSubjectImage('mapeh')">➕ Add Image</button>
+  <div id="mapeh"></div>
+
+  <h3>🛠️ TLE</h3>
+  <button class="btn" onclick="addSubjectImage('tle')">➕ Add Image</button>
+  <div id="tle"></div>
+
+  <h3>💡 ESP</h3>
+  <button class="btn" onclick="addSubjectImage('esp')">➕ Add Image</button>
+  <div id="esp"></div>
+</div>
+
+<input type="file" id="fileInput" style="display:none" accept="image/*">
+<p><i>Work hard every day, one day all your hard work will finally pay off!</i></p>
+</section>
+
+</div>
+
+<script>
+// Navigation
+function showSection(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+// Open DepEd
+function openDepEd(){
+    window.open('https://lrmds.deped.gov.ph/grade/8','_blank');
+}
+
+// Quizzes
+const quizzes={
+math:[
+{q:"What is 9 × 6?",o:["45","54","56","60"],a:1},
+{q:"Square root of 81?",o:["3","6","9","12"],a:2},
+{q:"50% of 200?",o:["50","75","100","200"],a:2}
+],
+science:[
+{q:"Red Planet?",o:["Earth","Mars","Venus","Jupiter"],a:1},
+{q:"Plants produce?",o:["Oxygen","Smoke","Stone","Metal"],a:0},
+{q:"Center of Atom?",o:["Electron","Shell","Nucleus","Proton"],a:2}
+],
+english:[
+{q:"Correct sentence:",o:["He don't like math","He doesn’t like math","He not like math"],a:1},
+{q:"Synonym of Smart",o:["Dumb","Clever","Lazy"],a:1},
+{q:"Noun in: The cat ran.",o:["cat","ran","the"],a:0}
+],
+filipino:[
+{q:"Ano ang kahulugan ng 'maligaya'?",o:["Malungkot","Masaya","Galit","Pagod"],a:1},
+{q:"Ano ang wastong pangungusap?",o:["Si Maria ay naglalaro","Si Maria naglalaro","Naglalaro si Maria naglalaro"],a:0},
+{q:"Piliin ang kasingkahulugan ng 'mabilis'",o:["Matulin","Mabagal","Mabigat","Malakas"],a:0}
+],
+ap:[
+{q:"Sino ang kauna-unahang Pangulo ng Pilipinas?",o:["Jose Rizal","Emilio Aguinaldo","Andres Bonifacio"],a:1},
+{q:"Anong petsa ipinahayag ang Kalayaan ng Pilipinas?",o:["June 12","July 4","August 21"],a:0},
+{q:"Ano ang kabisera ng Pilipinas?",o:["Cebu","Manila","Davao"],a:1}
+],
+mapeh:[
+{q:"Ano ang tamang posisyon sa basketball?",o:["Shooting Guard","Goalkeeper","Pitcher","Striker"],a:0},
+{q:"Ano ang pangunahing elemento sa musika?",o:["Melody","Rhythm","Harmony","Bass"],a:1},
+{q:"Alin ang bahagi ng MAPEH?",o:["Math","Science","Arts","English"],a:2}
+]
+};
+
+let currentQuiz=[],index=0,score=0;
+
+function startQuiz(subject){
+    currentQuiz=quizzes[subject];
+    index=0;
+    score=0;
+    document.getElementById("quiz").style.display="block";
+    document.getElementById("result").style.display="none";
+    showQuestion();
+}
+
+function showQuestion(){
+    let q=currentQuiz[index];
+    document.getElementById("question").innerText=q.q;
+    document.getElementById("current").innerText="Question "+(index+1)+" of "+currentQuiz.length;
+    let html="";
+    q.o.forEach((opt,i)=>{
+        html+=`<button class="option" onclick="check(${i})">${opt}</button>`;
+    });
+    document.getElementById("options").innerHTML=html;
+}
+
+function check(choice){
+    if(choice===currentQuiz[index].a) score++;
+    index++;
+    if(index<currentQuiz.length) showQuestion();
+    else finishQuiz();
+}
+
+function finishQuiz(){
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("result").style.display="block";
+    document.getElementById("score").innerText=score+" / "+currentQuiz.length;
+}
+
+function restartQuiz(){
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("result").style.display="none";
+}
+
+// Mindmap: add images per subject
+function addSubjectImage(subjectId){
+    const fileInput = document.getElementById('fileInput');
+    fileInput.click();
+    fileInput.onchange = function(){
+        const file = this.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = function(e){
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                document.getElementById(subjectId).appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
